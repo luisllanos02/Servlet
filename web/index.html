@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Hola mundo</div>
+        <input type="text" name="usuario" placeholder="usuario" id="user">
+        <input type="password" name="clave" placeholder="clave" id="pass">
+        <button onclick="logear()">Login</button>
+        <div id="rpta"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            function logear() {
+                var usuario = document.getElementById("user").value;
+                var clave = document.getElementById("pass").value;
+                console.log('haciendo el login. ' + usuario + ' clave: ' + clave);
+                $.ajax({
+                    method: 'POST',
+                    url: 'MiServlet',
+                    data: {
+                        usuario: usuario,
+                        clave: clave
+                    },
+                    success: function (msg) {
+                        console.log(msg);
+                        document.getElementById("rpta").innerHTML = msg.rpta_msj;
+                    },
+                    error: function (msg) {
+                        console.error(msg);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
